@@ -1,0 +1,19 @@
+{
+  "deploy_settings": {
+    "default": {
+      "skill_id": "amzn1.ask.skill.b3e2f344-00a1-4693-a153-71a2f2c39f1a",
+      "was_cloned": false,
+      "merge": {
+        "skillManifest": {
+          "apis": {
+            "custom": {
+              "endpoint": {
+                "uri": "ask-custom-mathWorkbook-default"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
