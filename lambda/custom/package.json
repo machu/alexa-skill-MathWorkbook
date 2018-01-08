@@ -1,10 +1,13 @@
 {
-  "name": "skill-sample-nodejs-hello-world",
-  "version": "1.0.0",
-  "description": "Hello world sample skill",
+  "name": "alexa-skill-MathWorkbook",
+  "version": "0.0.1",
+  "description": "AWS lambda function for alexa skill",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "MATSUOKA Kohei",
+  "license": "GPL-3.0",
+  "repository": "machu/alexa-skill-MathWorkbook",
   "dependencies": {
     "alexa-sdk": "^1.0.0"
   }
