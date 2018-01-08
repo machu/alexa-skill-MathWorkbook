@@ -3,12 +3,16 @@
   "version": "0.0.1",
   "description": "AWS lambda function for alexa skill",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/eslint/bin/eslint.js ./"
   },
   "author": "MATSUOKA Kohei",
   "license": "GPL-3.0",
   "repository": "machu/alexa-skill-MathWorkbook",
   "dependencies": {
     "alexa-sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.15.0"
   }
 }
