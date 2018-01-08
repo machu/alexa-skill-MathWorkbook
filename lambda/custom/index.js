@@ -7,6 +7,8 @@ const STATES = {
     START: '_STARTMODE', // Entry point, start the game.
 };
 
+const Question = require("./lib/question");
+
 exports.handler = function(event, context) {
     const alexa = Alexa.handler(event, context);
     alexa.appId = APP_ID;
@@ -16,6 +18,10 @@ exports.handler = function(event, context) {
 
 const newSessionHandlers = {
     'LaunchRequest': function () {
+        this.handler.state = STATES.START;
+        this.emitWithState('StartWork');
+    },
+    'AnswerIntent': function () {
         this.handler.state = STATES.START;
         this.emitWithState('StartWork');
     },
@@ -35,28 +41,39 @@ const newSessionHandlers = {
 const startStateHandlers = Alexa.CreateStateHandler(STATES.START, {
     'StartWork': function () {
         // TODO: 初期化処理をここに書く
+        const question = Question.createQuestion();
+        this.attributes['question'] = question;
         this.handler.state = STATES.WORK;
-        this.emit(':ask', "1たす1は？");
+        this.emit(':ask', question.speech);
     },
 });
 
 const workStateHandlers = Alexa.CreateStateHandler(STATES.WORK, {
     'AnswerIntent': function () {
+        const question = this.attributes['question'];
         const answer = parseInt(this.event.request.intent.slots.Answer.value, 10);
-        const speechOutput = (answer == 2)
+        if (isNaN(answer)) {
+            this.emit(':ask', 'すみません、聞き取れませんでした。' + question.speech);
+        }
+        const speechOutput = (answer == question.answer)
             ? "正解。"
             : "惜しい！";
-        const repromptText = '1たす1は？';
+        const newQuestion = Question.createQuestion();
+        const repromptText = newQuestion.speech;
+        this.attributes['question'] = newQuestion;
         this.response
             .speak(speechOutput + repromptText)
             .listen(repromptText);
         this.emit(':responseReady');
     },
     'AMAZON.StopIntent': function () {
-        this.tell('終了します');
+        this.emit(':tell', 'またね');
     },
     'AMAZON.CancelIntent': function () {
-        this.tell('終了します');
+        this.emit(':tell', 'またね');
+    },
+    'SessionEndedRequest': function () {
+        this.emit(':tell', 'またね');
     },
     'Unhandled' : function () {
         this.emit(':ask', '聞き取れませんでした。もう一度、答えを言ってください');
