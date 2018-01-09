@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "AWS lambda function for alexa skill",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/eslint/bin/eslint.js ./"
+    "test": "mocha --require intelli-espower-loader",
+    "lint": "eslint ./"
   },
   "author": "MATSUOKA Kohei",
   "license": "GPL-3.0",
@@ -13,6 +13,9 @@
     "alexa-sdk": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.15.0"
+    "eslint": "^4.15.0",
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^4.1.0",
+    "power-assert": "^1.4.4"
   }
 }
