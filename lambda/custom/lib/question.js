@@ -35,4 +35,4 @@ levels[3] = () => {
 
 const createRandomNumber = (min = 0, max = 100) => {
     return Math.floor(Math.random() * (max + 1 - min) + min);
-}
+};
