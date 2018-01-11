@@ -13,6 +13,7 @@
     "alexa-sdk": "^1.0.0"
   },
   "devDependencies": {
+    "alexa-conversation": "^0.2.0",
     "eslint": "^4.15.0",
     "intelli-espower-loader": "^1.0.1",
     "mocha": "^4.1.0",
