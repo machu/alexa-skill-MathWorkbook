@@ -173,9 +173,9 @@ describe ('Question', () => {
         context('division', () => {
             context('when level1', () => {
                 it('', () => {
-                    for (let i = 0; i < 100; i++) {
-                        const q = Question.createQuestion(1, "division");
-                    }
+                    // for (let i = 0; i < 100; i++) {
+                    //     const q = Question.createQuestion(1, "division");
+                    // }
                 });
             });
         });

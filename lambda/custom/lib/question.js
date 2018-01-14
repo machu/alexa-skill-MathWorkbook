@@ -25,7 +25,7 @@ exports.getLevelFromSlots = (slots) => {
         operation: operation_table[slots["OPERATER"].value],
         level: level,
         count: 0,
-        correct: 1
+        correct: 0
     };
 };
 

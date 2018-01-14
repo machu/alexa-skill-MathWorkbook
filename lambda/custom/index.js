@@ -58,7 +58,7 @@ const newSessionHandlers = {
 const selectStateHandlers = Alexa.CreateStateHandler(STATES.SELECT, {
     'AskWorkLevel': function () {
         const speechOutput = "私が出す10問の問題に答えてください。まず、";
-        const repromptText = "計算の種類を足し算、引き算、掛け算、割り算から選んでください。足し算のレベル2、のようにレベルも選べます。";
+        const repromptText = "計算の種類を、足し算、引き算、掛け算、割り算から選んでください。足し算のレベル、3、のようにレベルも選べます。";
         this.emit(':ask', speechOutput + repromptText, repromptText);
     },
     // 足し算のレベル2
@@ -68,6 +68,11 @@ const selectStateHandlers = Alexa.CreateStateHandler(STATES.SELECT, {
         const level = Question.getLevelFromSlots(this.event.request.intent.slots);
         if (!level["operation"]) {
             this.emit('Unhandled');
+        }
+        if (level.level > 5) {
+            const speechOutput = "レベルは1から5までで選んでください。";
+            const repromptText = "計算の種類を、足し算、引き算、掛け算、割り算から選んでください。足し算のレベル、3、のようにレベルも選べます。";
+            this.emit(':ask', speechOutput + repromptText, repromptText);
         }
         // 初期化処理
         this.attributes['level'] = level;
@@ -80,9 +85,17 @@ const selectStateHandlers = Alexa.CreateStateHandler(STATES.SELECT, {
         this.attributes['question'] = question;
         this.emit(':ask', speechOutput + repromptText, repromptText);
     },
+    'AMAZON.StopIntent': function () {
+        console.log("THIS.EVENT = " + JSON.stringify(this.event));
+        this.emit(':tell', 'さようなら');
+    },
+    'AMAZON.CancelIntent': function () {
+        console.log("THIS.EVENT = " + JSON.stringify(this.event));
+        this.emit(':tell', 'さようなら');
+    },
     'Unhandled': function () {
         const speechOutput = "すみません、聞き取れませんでした。";
-        const repromptText = "計算の種類を、足し算、引き算、掛け算、割り算から選んでください。足し算のレベル2、のようにレベルも選べます。";
+        const repromptText = "計算の種類を、足し算、引き算、掛け算、割り算から選んでください。足し算のレベル、3、のようにレベルも選べます。";
         this.emit(':ask', speechOutput + repromptText, repromptText);
     }
 });
@@ -104,11 +117,12 @@ const workStateHandlers = Alexa.CreateStateHandler(STATES.WORK, {
             speechOutput = "惜しい。";
         }
         level.count++;
-        if (level.count > MAX_WORKS) {
-            this.emit(':tell', `10問中${level.correct}回、正解しました`);
+        if (level.count >= MAX_WORKS) {
+            speechOutput += `${level.count}問中${level.correct}回、正解しました`;
+            this.emit(':tell', speechOutput);
         } else {
             // 次の問題を出す
-            const newQuestion = Question.createQuestion(level.level);
+            const newQuestion = Question.createQuestion(level.level, level.operation);
             const repromptText = newQuestion.speech;
             this.attributes['question'] = newQuestion;
             this.emit(':ask', speechOutput + repromptText, repromptText);
@@ -123,15 +137,15 @@ const workStateHandlers = Alexa.CreateStateHandler(STATES.WORK, {
     },
     'AMAZON.StopIntent': function () {
         console.log("THIS.EVENT = " + JSON.stringify(this.event));
-        this.emit(':tell', 'またね');
+        this.emit(':tell', 'さようなら');
     },
     'AMAZON.CancelIntent': function () {
         console.log("THIS.EVENT = " + JSON.stringify(this.event));
-        this.emit(':tell', 'またね');
+        this.emit(':tell', 'さようなら');
     },
     'SessionEndedRequest': function () {
         console.log("THIS.EVENT = " + JSON.stringify(this.event));
-        this.emit(':tell', 'またね');
+        this.emit(':tell', 'さようなら');
     },
     'Unhandled' : function () {
         console.log("THIS.EVENT = " + JSON.stringify(this.event));
