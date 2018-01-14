@@ -12,11 +12,11 @@
           "samples": []
         },
         {
-          "name": "AMAZON.StopIntent",
+          "name": "AMAZON.StartOverIntent",
           "samples": []
         },
         {
-          "name": "AMAZON.YesIntent",
+          "name": "AMAZON.StopIntent",
           "samples": []
         },
         {
@@ -31,6 +31,78 @@
             "{Answer}",
             "{Answer} です"
           ]
+        },
+        {
+          "name": "SelectLevelIntent",
+          "slots": [
+            {
+              "name": "OPERATER",
+              "type": "OPERATER"
+            },
+            {
+              "name": "LEVEL",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "{OPERATER} のレベル {LEVEL}",
+            "レベル {LEVEL}",
+            "{OPERATER}",
+            "レベル {LEVEL} の {OPERATER}",
+            "レベル {LEVEL} の {OPERATER} をはじめて",
+            "レベル {LEVEL} の {OPERATER} をはじめる",
+            "レベル {LEVEL} の {OPERATER} を開始",
+            "レベル {LEVEL} の {OPERATER} を開始して",
+            "レベル {LEVEL} の {OPERATER} をやりたい",
+            "{OPERATER} のレベル {LEVEL} をはじめて",
+            "{OPERATER} のレベル {LEVEL} をはじめる",
+            "{OPERATER} のレベル {LEVEL} を開始",
+            "{OPERATER} のレベル {LEVEL} を開始して",
+            "{OPERATER} のレベル {LEVEL} をやりたい"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "1",
+              "name": {
+                "value": "足し算",
+                "synonyms": [
+                  "たしざん"
+                ]
+              }
+            },
+            {
+              "id": "2",
+              "name": {
+                "value": "引き算",
+                "synonyms": [
+                  "ひきざん"
+                ]
+              }
+            },
+            {
+              "id": "4",
+              "name": {
+                "value": "割り算",
+                "synonyms": [
+                  "わりざん"
+                ]
+              }
+            },
+            {
+              "id": "3",
+              "name": {
+                "value": "掛け算",
+                "synonyms": [
+                  "かけざん"
+                ]
+              }
+            }
+          ],
+          "name": "OPERATER"
         }
       ]
     }

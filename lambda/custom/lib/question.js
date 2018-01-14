@@ -1,7 +1,25 @@
-exports.createQuestion = (level = 1) => {
+exports.createQuestion = (level = 1, operation = "addition") => {
     const question = levels[level]();
     question.speech = `${question.x}たす、${question.y}は？`;
     return question;
+};
+
+exports.getLevelFromSlots = (slots) => {
+    const operation_table = {
+        "足し算": "addition",
+        "引き算": "subtraction",
+        "掛け算": "multiplication",
+        "割り算": "division"
+    };
+    const level = (!slots["LEVEL"] || isNaN(slots["LEVEL"].value))
+        ? 1
+        : Number(slots["LEVEL"].value);
+    return {
+        operation: operation_table[slots["OPERATER"].value],
+        level: level,
+        count: 0,
+        correct: 1
+    };
 };
 
 const levels = {};
