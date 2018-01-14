@@ -100,7 +100,6 @@ describe ('Question', () => {
                         assert(q.y > 10);
                         assert(q.y < 50);
                         assert(q.answer >= 0);
-                        console.log(q);
                     }
                 });
             });
@@ -113,14 +112,72 @@ describe ('Question', () => {
                         assert(q.y > 10);
                         assert(q.y < 100);
                         assert(q.answer >= 0);
-                        console.log(q);
                     }
                 });
             });
         });
         context('multiplication', () => {
+            context('when level1', () => {
+                it('1の段, 2の段, 5の段', () => {
+                    for (let i = 0; i < 100; i++) {
+                        const q = Question.createQuestion(1, "multiplication");
+                        assert([1,2,5].indexOf(q.x) >= 0);
+                        assert(q.y >= 1);
+                        assert(q.y <= 9);
+                    }
+                });
+            });
+            context('when level2', () => {
+                it('1の段から5の段まで', () => {
+                    for (let i = 0; i < 100; i++) {
+                        const q = Question.createQuestion(2, "multiplication");
+                        assert(q.x >= 1);
+                        assert(q.x <= 5);
+                        assert(q.y >= 1);
+                        assert(q.y <= 9);
+                    }
+                });
+            });
+            context('when level3', () => {
+                it('6の段, 7の段', () => {
+                    for (let i = 0; i < 100; i++) {
+                        const q = Question.createQuestion(3, "multiplication");
+                        assert([6,7].indexOf(q.x) >= 0);
+                        assert(q.y >= 1);
+                        assert(q.y <= 9);
+                    }
+                });
+            });
+            context('when level4', () => {
+                it('8の段, 9の段', () => {
+                    for (let i = 0; i < 100; i++) {
+                        const q = Question.createQuestion(4, "multiplication");
+                        assert([8,9].indexOf(q.x) >= 0);
+                        assert(q.y >= 1);
+                        assert(q.y <= 9);
+                    }
+                });
+            });
+            context('when level5', () => {
+                it('すべての九九', () => {
+                    for (let i = 0; i < 100; i++) {
+                        const q = Question.createQuestion(5, "multiplication");
+                        assert(q.x >= 1);
+                        assert(q.x <= 9);
+                        assert(q.y >= 1);
+                        assert(q.y <= 9);
+                    }
+                });
+            });
         });
         context('division', () => {
+            context('when level1', () => {
+                it('', () => {
+                    for (let i = 0; i < 100; i++) {
+                        const q = Question.createQuestion(1, "division");
+                    }
+                });
+            });
         });
     });
 });

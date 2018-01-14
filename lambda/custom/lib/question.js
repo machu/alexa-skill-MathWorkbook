@@ -126,15 +126,45 @@ const levels = {
         }
     },
     "multiplication": {
+        // レベル1 … 1の段, 2の段, 5の段
         "1": () => {
+            const r = {};
+            r.x = [1,2,5][createRandomNumber(0, 2)];
+            r.y = createRandomNumber(1, 9);
+            r.answer = r.x * r.y;
+            return r;
         },
+        // レベル2 … 1の段から5の段まで
         "2": () => {
+            const r = {};
+            r.x = createRandomNumber(1, 5);
+            r.y = createRandomNumber(1, 9);
+            r.answer = r.x * r.y;
+            return r;
         },
+        // レベル3 … 6の段, 7の段
         "3": () => {
+            const r = {};
+            r.x = [6,7][createRandomNumber(0, 1)];
+            r.y = createRandomNumber(1, 9);
+            r.answer = r.x * r.y;
+            return r;
         },
+        // レベル4 … 8の段, 9の段
         "4": () => {
+            const r = {};
+            r.x = [8,9][createRandomNumber(0, 1)];
+            r.y = createRandomNumber(1, 9);
+            r.answer = r.x * r.y;
+            return r;
         },
+        // レベル5 … すべての九九
         "5": () => {
+            const r = {};
+            r.x = createRandomNumber(1, 9);
+            r.y = createRandomNumber(1, 9);
+            r.answer = r.x * r.y;
+            return r;
         }
     },
     "division": {
